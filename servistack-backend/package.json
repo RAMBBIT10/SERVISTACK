@@ -22,7 +22,7 @@
     "@opentelemetry/sdk-node": "^0.301.0",
     "amqplib": "^2.2.0",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^5.3.0",
     "express-oauth2-jwt-bearer": "^1.6.0",
     "firebase-admin": "^12.1.0",
     "helmet": "^8.3.0",
