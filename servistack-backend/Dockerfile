@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:25-alpine
 ENV TZ=UTC
 WORKDIR /app
 COPY package*.json ./
