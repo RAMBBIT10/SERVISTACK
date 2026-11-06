@@ -1,0 +1,10 @@
+<h2>{{ 'qr.titulo' | texto }}</h2>
+<div [id]="idVisor"></div>
+@if (!escaneando) {
+  <button (click)="iniciar()">{{ 'qr.abrir' | texto }}</button>
+} @else {
+  <button (click)="detener()">{{ 'qr.cerrar' | texto }}</button>
+}
+@if (error) {
+  <p class="error">{{ error }}</p>
+}

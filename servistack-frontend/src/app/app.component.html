@@ -1,0 +1,13 @@
+<header class="barra">
+  <a routerLink="/productos" class="logo">{{ 'app.nombre' | texto }}</a>
+  @if (auth.isAuthenticated$ | async) {
+    <nav>
+      <a routerLink="/productos">{{ 'menu.inventario' | texto }}</a>
+      <a routerLink="/escanear">{{ 'menu.escanear' | texto }}</a>
+      <button (click)="salir()">{{ 'menu.salir' | texto }}</button>
+    </nav>
+  }
+</header>
+<main>
+  <router-outlet />
+</main>

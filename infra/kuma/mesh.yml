@@ -1,0 +1,13 @@
+type: Mesh
+name: default
+mtls:
+  enabledBackend: ca-1
+  backends:
+    - name: ca-1
+      type: builtin
+      dpCert:
+        rotation:
+          expiration: 24h
+      conf:
+        caCert:
+          expiration: 10y

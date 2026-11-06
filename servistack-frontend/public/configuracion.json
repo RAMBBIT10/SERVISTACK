@@ -1,0 +1,15 @@
+{
+  "apiUrl": "http://localhost:8000/api",
+  "localeFechas": "es-CO",
+  "auth0": {
+    "dominio": "",
+    "clientId": "",
+    "audiencia": "",
+    "claimTipoEmpleado": ""
+  },
+  "camara": {
+    "lado": "environment",
+    "fps": 10,
+    "lado_visor": 240
+  }
+}

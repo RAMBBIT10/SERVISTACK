@@ -1,0 +1,94 @@
+services:
+  - type: web
+    name: servistack-backend
+    runtime: docker
+    rootDir: servistack-backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /salud
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: servistack-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: servistack-redis
+          property: connectionString
+      - key: AUTH0_ISSUER_BASE_URL
+        sync: false
+      - key: AUTH0_AUDIENCE
+        value: https://servistack-api
+      - key: AUTH0_CLAIM_TIPO_EMPLEADO
+        value: https://servistack/tipo_empleado
+      - key: FCM_TOPICO_STOCK_BAJO
+        value: stock-bajo
+      - key: FRONTEND_URL
+        sync: false
+      - key: ENLACE_CORTO_BASE
+        sync: false
+      - key: TZ
+        value: UTC
+      - key: ZONA_HORARIA_VISUAL
+        value: America/Bogota
+      - key: LOCALE_FECHAS
+        value: es-CO
+      - key: OTEL_SDK_DISABLED
+        value: "true"
+
+  - type: web
+    name: servistack-kong
+    runtime: docker
+    rootDir: infra/kong
+    dockerfilePath: ./Dockerfile.nube
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: BACKEND_DESTINO
+        fromService:
+          type: web
+          name: servistack-backend
+          property: hostport
+      - key: ORIGEN_WEB
+        sync: false
+
+  - type: web
+    name: servistack-frontend
+    runtime: docker
+    rootDir: servistack-frontend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: API_URL
+        sync: false
+      - key: AUTH0_DOMINIO
+        sync: false
+      - key: AUTH0_CLIENT_ID
+        sync: false
+      - key: AUTH0_AUDIENCE
+        value: https://servistack-api
+      - key: AUTH0_CLAIM_TIPO_EMPLEADO
+        value: https://servistack/tipo_empleado
+      - key: LOCALE_FECHAS
+        value: es-CO
+      - key: CAMARA_LADO
+        value: environment
+      - key: CAMARA_FPS
+        value: "10"
+      - key: CAMARA_LADO_VISOR
+        value: "240"
+
+  - type: keyvalue
+    name: servistack-redis
+    plan: free
+    ipAllowList: []
+
+databases:
+  - name: servistack-postgres
+    plan: free
+    postgresMajorVersion: "16"
+    databaseName: servistack
+    user: servistack

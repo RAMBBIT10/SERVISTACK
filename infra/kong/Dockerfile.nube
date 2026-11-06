@@ -1,0 +1,8 @@
+FROM kong:3.6
+USER root
+COPY kong.nube.yml.template /etc/kong/kong.nube.yml.template
+USER kong
+ENV KONG_DATABASE=off
+ENV KONG_DECLARATIVE_CONFIG=/tmp/kong.yml
+ENV KONG_DNS_ORDER=LAST,AAAA,A
+CMD ["sh", "-c", "sed -e \"s|\\${BACKEND_DESTINO}|$BACKEND_DESTINO|g\" -e \"s|\\${ORIGEN_WEB}|$ORIGEN_WEB|g\" /etc/kong/kong.nube.yml.template > /tmp/kong.yml && KONG_PROXY_LISTEN=\"0.0.0.0:${PORT:-8000}\" exec /docker-entrypoint.sh kong docker-start"]

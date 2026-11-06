@@ -1,0 +1,5 @@
+.barra { display: flex; justify-content: space-between; align-items: center; padding: 12px var(--espacio); background: var(--color-barra); color: var(--color-sobre-primario); }
+.barra a { color: var(--color-sobre-primario); text-decoration: none; margin-right: 14px; }
+.logo { font-weight: 700; }
+nav button { background: transparent; border: 1px solid var(--color-borde-campo); padding: 4px 10px; }
+main { max-width: 720px; margin: 0 auto; padding: var(--espacio); }

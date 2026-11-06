@@ -1,0 +1,30 @@
+<section>
+  <div class="barra">
+    <h2>{{ 'inventario.titulo' | texto }}</h2>
+    <a routerLink="/escanear" class="boton">{{ 'inventario.escanear' | texto }}</a>
+  </div>
+
+  <input class="buscador" type="search" [placeholder]="textoBuscar" (input)="alFiltrar($event)" />
+
+  @if (cargando) {
+    <p>{{ 'inventario.cargando' | texto }}</p>
+  } @else if (error) {
+    <p class="error">{{ error }}</p>
+  } @else if (filtrados.length === 0) {
+    <p>{{ 'inventario.vacio' | texto }}</p>
+  } @else {
+    <ul class="lista">
+      @for (p of filtrados; track p.id) {
+        <li>
+          <a [routerLink]="['/productos', p.id]">
+            <div>
+              <strong>{{ p.nombre }}</strong>
+              <small>{{ p.codigo }} · {{ p.categoria || ('inventario.sinCategoria' | texto) }}</small>
+            </div>
+            <span class="stock" [class.bajo]="esStockBajo(p)">{{ p.stock_actual }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -1,0 +1,8 @@
+.barra { display: flex; justify-content: space-between; align-items: center; }
+.boton { background: var(--color-primario); color: var(--color-sobre-primario); padding: 8px 14px; border-radius: var(--radio); text-decoration: none; }
+.buscador { width: 100%; padding: 10px; margin: 12px 0; border: 1px solid var(--color-borde-campo); border-radius: var(--radio); box-sizing: border-box; }
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li a { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--color-borde); color: inherit; text-decoration: none; }
+.lista small { display: block; color: var(--color-texto-suave); }
+.stock { background: var(--color-ok-fondo); color: var(--color-ok-texto); padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+.stock.bajo { background: var(--color-alerta-fondo); color: var(--color-alerta-texto); }

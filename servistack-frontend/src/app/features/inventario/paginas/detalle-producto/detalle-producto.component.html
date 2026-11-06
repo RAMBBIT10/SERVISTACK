@@ -1,0 +1,15 @@
+<a routerLink="/productos">{{ 'detalle.volver' | texto }}</a>
+
+@if (error) {
+  <p class="error">{{ error }}</p>
+} @else if (producto) {
+  <h2>{{ producto.nombre }}</h2>
+  <dl>
+    <dt>{{ 'detalle.codigo' | texto }}</dt><dd>{{ producto.codigo }}</dd>
+    <dt>{{ 'detalle.categoria' | texto }}</dt><dd>{{ producto.categoria || ('inventario.sinCategoria' | texto) }}</dd>
+    <dt>{{ 'detalle.stock' | texto }}</dt><dd>{{ producto.stock_actual }}</dd>
+    <dt>{{ 'detalle.minimo' | texto }}</dt><dd>{{ producto.cantidad_minima }}</dd>
+  </dl>
+} @else {
+  <p>{{ 'detalle.cargando' | texto }}</p>
+}

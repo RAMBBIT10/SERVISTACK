@@ -1,0 +1,45 @@
+_format_version: "3.0"
+
+upstreams:
+  - name: backend-upstream
+    algorithm: round-robin
+    healthchecks:
+      active:
+        http_path: /salud
+        healthy:
+          interval: 5
+          successes: 1
+        unhealthy:
+          interval: 5
+          http_failures: 2
+          timeouts: 2
+    targets:
+      - target: backend:3000
+
+services:
+  - name: backend-servistack
+    host: backend-upstream
+    port: 3000
+    protocol: http
+    routes:
+      - name: ruta-api
+        paths: ["/api"]
+        strip_path: true
+      - name: ruta-enlace-corto
+        paths: ["/c"]
+        strip_path: false
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+
+plugins:
+  - name: cors
+    config:
+      origins:
+        - http://localhost:4200
+        - http://localhost:8080
+      methods: [GET, POST, PUT, PATCH, DELETE, OPTIONS]
+      headers: [Authorization, Content-Type, Accept]
+      max_age: 3600

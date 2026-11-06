@@ -1,0 +1,15 @@
+{
+  "apiUrl": "${API_URL}",
+  "localeFechas": "${LOCALE_FECHAS}",
+  "auth0": {
+    "dominio": "${AUTH0_DOMINIO}",
+    "clientId": "${AUTH0_CLIENT_ID}",
+    "audiencia": "${AUTH0_AUDIENCE}",
+    "claimTipoEmpleado": "${AUTH0_CLAIM_TIPO_EMPLEADO}"
+  },
+  "camara": {
+    "lado": "${CAMARA_LADO}",
+    "fps": ${CAMARA_FPS},
+    "lado_visor": ${CAMARA_LADO_VISOR}
+  }
+}
